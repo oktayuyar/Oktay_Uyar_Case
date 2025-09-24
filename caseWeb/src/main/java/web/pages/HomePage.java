@@ -1,7 +1,7 @@
 package web.pages;
 
-import io.qameta.allure.Step;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import web.util.BasePageUtil;
 
@@ -16,19 +16,16 @@ public class HomePage extends BasePageUtil {
         super(driver);
     }
 
-    @Step("Check page title contains '{expected}' ")
     public void checkPageTitle(String expected) {
-        Assert.assertTrue(isPageTitleContains(expected));
+        Assert.assertTrue(isPageTitleContains(expected), "Page title is not contains expected value!");
     }
 
-    @Step("Check home page opened")
     public void checkHomePageOpened() {
-        Assert.assertTrue(isElementDisplayed(insiderLogo),"Insider logo is not present");
-        Assert.assertTrue(isElementDisplayed(demoButton),"Demo button is not present");
-        Assert.assertTrue(isElementDisplayed(companyMenu),"Company menu item is not present");
+        Assert.assertTrue(isElementDisplayed(insiderLogo),"Insider logo is not present!");
+        Assert.assertTrue(isElementDisplayed(demoButton),"Demo button is not present!");
+        Assert.assertTrue(isElementDisplayed(companyMenu),"Company menu item is not present!");
     }
 
-    @Step("Open careers page")
     public void openCareersPage() {
         waitUntilElementVisible(companyMenu);
         clickElement(companyMenu);

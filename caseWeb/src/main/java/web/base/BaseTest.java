@@ -4,13 +4,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -51,6 +51,20 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get("https://useinsider.com");
+        closeCookiesPopup();
+    }
+
+    private void closeCookiesPopup() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebElement acceptButton = wait.until(
+                    ExpectedConditions.elementToBeClickable(By.id("wt-cli-accept-all-btn"))
+            );
+            acceptButton.click();
+            Log.info("Cookies popup closed.");
+        } catch (Exception e) {
+            Log.info("Cookies popup is not present, continue to test.");
+        }
     }
 
     @AfterMethod(alwaysRun = true)

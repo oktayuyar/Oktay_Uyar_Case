@@ -1,8 +1,8 @@
 package web.util;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import web.base.BaseTest;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,98 +15,126 @@ public class BasePageUtil extends BaseTest {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected Actions actions;
 
     public BasePageUtil(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.actions = new Actions(driver);
     }
 
-    final private Integer timeout = 10;
-    final static Logger logger = Logger.getLogger(BasePageUtil.class);
 
     public WebElement findElement(By selector) {
         try {
-            logger.info("findElement method called:  finding " + selector);
+            Log.info("findElement method called:  finding " + selector);
             return wait.until(ExpectedConditions.elementToBeClickable(selector));
-        } catch (Exception ex) {
-            logger.error(selector + " element can not find!");
-            throw ex;
+        } catch (Exception e) {
+            Log.error(selector + " element can not find!");
+            throw e;
         }
     }
 
     public List<WebElement> findElements(By selector) {
         try {
-            logger.info("findElements method called:  finding" + selector);
+            Log.info("findElements method called:  finding" + selector);
             List<WebElement> elements = driver.findElements(selector);
             wait.until(ExpectedConditions.visibilityOfAllElements(elements));
             return elements;
-        } catch (Exception ex) {
-            logger.error(selector + " elements can not find!");
-            throw ex;
+        } catch (Exception e) {
+            Log.error(selector + " elements can not find!");
+            throw e;
         }
     }
 
+    public void hoverOverElement(By selector) {
+        actions.moveToElement(findElement(selector)).perform();
+        System.out.println("Hovered: " + selector);
+    }
+
     public void waitUntilElementVisible(By selector) {
-        logger.info("waitUntilElementVisible method called: " + selector);
+        Log.info("waitUntilElementVisible method called: " + selector);
         wait.until(ExpectedConditions.visibilityOfElementLocated(selector));
     }
 
     public void clickElement(By selector) {
         try {
-            logger.info("clickElement method called:  clicking " + selector);
+            Log.info("clickElement method called:  clicking " + selector);
             wait.until(ExpectedConditions.elementToBeClickable(selector)).click();
-        } catch (Exception ex) {
-            logger.error(selector + " element can not clicked!");
-            throw ex;
+        } catch (Exception e) {
+            Log.error(selector + " element can not clicked!");
+            throw e;
         }
     }
 
     public void sendKeys(By selector, String text) {
         try {
-            logger.info("sendKeys method called: sending " + text + " to " + selector + " element");
+            Log.info("sendKeys method called: sending " + text + " to " + selector + " element");
             findElement(selector).sendKeys(text);
-        } catch (Exception ex) {
-            logger.error("Can not send keys to " + selector + " element!");
-            throw ex;
+        } catch (Exception e) {
+            Log.error("Can not send keys to " + selector + " element!");
+            throw e;
         }
     }
 
     public void sendKeyCode(By selector, Keys text) {
         try {
-            logger.info("sendKeyCode method called: sending " + text + " to " + selector + " element");
+            Log.info("sendKeyCode method called: sending " + text + " to " + selector + " element");
             findElement(selector).sendKeys(text);
-        } catch (Exception ex) {
-            logger.error("Can not send keycode to " + selector + " element!");
-            throw ex;
+        } catch (Exception e) {
+            Log.error("Can not send keycode to " + selector + " element!");
+            throw e;
         }
     }
 
     public String getText(By selector) {
         try {
-            logger.info("getText method called: getting text " + selector);
+            Log.info("getText method called: getting text " + selector);
             return findElement(selector).getText();
-        } catch (Exception ex) {
-            logger.error("Can not get text from " + selector + " !");
-            throw ex;
+        } catch (Exception e) {
+            Log.error("Can not get text from " + selector + " !");
+            throw e;
+        }
+    }
+
+    public String getTextWithIndex(By selector, int index) {
+        try {
+            Log.info("getTextWithIndex method called: getting text " + selector);
+            String text = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(selector)).get(index).getText();
+            Log.info("Text is ---> " + text + " at " + index);
+            return text;
+        } catch (Exception e) {
+            Log.error("Can not get text from " + selector + " !");
+            throw e;
+        }
+    }
+
+    public String waitForText(By selector, String text) {
+        try {
+            wait.until(ExpectedConditions.textToBe(selector, text));
+            WebElement departmentFilter = driver.findElement(selector);
+            return departmentFilter.getText();
+        } catch (Exception e){
+            Log.error("Can not match text wiith the " + selector + " text!");
+            throw e;
         }
     }
 
     public String getElementAttribute(By selector, String attribute) {
         try {
-            logger.info("getElementAttribute method called: getting attribute " + selector);
+            Log.info("getElementAttribute method called: getting attribute " + selector);
             return findElement(selector).getAttribute(attribute);
-        } catch (Exception ex) {
-            logger.error("Can not get attribute from " + selector + " !");
-            throw ex;
+        } catch (Exception e) {
+            Log.error("Can not get attribute from " + selector + " !");
+            throw e;
         }
     }
 
     public boolean isElementDisplayed(By selector) {
         try {
-            logger.info("isElementDisplayed method called: " + selector);
+            Log.info("isElementDisplayed method called: " + selector);
             return findElement(selector).isDisplayed();
-        } catch (Exception ex) {
-            logger.error("Can not displayed " + selector + " !");
+        } catch (Exception e) {
+            Log.error("Can not displayed " + selector + " !");
             return false;
         }
     }
@@ -115,17 +143,46 @@ public class BasePageUtil extends BaseTest {
         try {
             Log.info("Page Title: " + driver.getTitle());
             return driver.getTitle().contains(expected);
-        } catch (Exception ex) {
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public void scrollIntoView(By locator) {
-        WebElement element = driver.findElement(locator);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    public void scrollIntoView(By selector) {
+        try {
+            WebElement element = driver.findElement(selector);
+            Log.info("scrollIntoView method called: " + selector);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        } catch (Exception e) {
+            Log.error("Can not scroll into the " + selector + " element!");
+            throw e;
+        }
     }
 
-    public void sleep(Integer seconds) {
+    public void selectFromDropdownWithScroll(By dropdownSelector, By optionSelector) {
+        Log.info("selectFromDropdownWithScroll method called: " + dropdownSelector);
+        clickElement(dropdownSelector);
+
+        boolean found = false;
+        for (int i = 0; i < 5; i++) {
+            try {
+                WebElement option = driver.findElement(optionSelector);
+                ((JavascriptExecutor) driver).executeScript(
+                        "arguments[0].scrollIntoView({block: 'center'});", option
+                );
+                wait.until(ExpectedConditions.elementToBeClickable(option)).click();
+                found = true;
+                break;
+            } catch (Exception ex) {
+                Log.error(optionSelector + " element can not find!");
+                throw ex;
+            }
+        }
+
+    }
+
+
+    public void waitSeconds(Integer seconds) {
         try {
             TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {

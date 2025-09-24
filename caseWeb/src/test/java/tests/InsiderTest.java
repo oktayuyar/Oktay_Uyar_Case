@@ -67,5 +67,13 @@ public class InsiderTest extends BaseTest {
             careersPage.openQAJobsInIstanbul();
         });
 
+        Allure.step("Check all jobs position contains “Quality Assurance” and all location contains Istanbul", () -> {
+            careersPage.checkListedJobsMatchWithFilters();
+        });
+
+        Allure.step("View the role and check redirect to the Lever Application", () -> {
+            careersPage.viewRoleAndCheckRedirectToLeverApp();
+        });
+
     }
 }
