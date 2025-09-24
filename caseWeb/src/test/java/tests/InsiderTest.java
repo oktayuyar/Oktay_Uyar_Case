@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import web.base.BaseTest;
 import io.qameta.allure.*;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import web.listeners.TestListener;
 import web.pages.CareersPage;
@@ -54,5 +53,19 @@ public class InsiderTest extends BaseTest {
         Allure.step("Check careers page opened", () -> {
             careersPage.checkCareersPageOpened();
         });
+    }
+
+    @Test(priority = 3, description = "Quality Assurance careers page, QA job tests")
+    @Story("The user must be able to access the careers page.")
+    public void testCareersQAJobsPage() {
+
+        Allure.step("Open quality assurance careers page", () -> {
+            careersPage.openQualityAssurancePage();
+        });
+
+        Allure.step("Open quality assurance jobs in Istanbul", () -> {
+            careersPage.openQAJobsInIstanbul();
+        });
+
     }
 }

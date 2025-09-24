@@ -120,8 +120,10 @@ public class BasePageUtil extends BaseTest {
         }
     }
 
-    private void scrollIntoView(WebElement element) {
+    public void scrollIntoView(By locator) {
+        WebElement element = driver.findElement(locator);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        sleep(5);
     }
 
     public void sleep(Integer seconds) {

@@ -9,7 +9,7 @@ public class HomePage extends BasePageUtil {
 
     private By demoButton = By.linkText("Get a Demo");
     private By insiderLogo = By.cssSelector("img[alt='insider_logo']");
-    private By companyMenu = By.xpath("//nav//a[contains(normalize-space(.), 'Company') or contains(., 'Company')]");
+    private By companyMenu = By.xpath("//a[normalize-space(text())='Company']");
     private By careersLink = By.linkText("Careers");
 
     public HomePage(WebDriver driver) {
