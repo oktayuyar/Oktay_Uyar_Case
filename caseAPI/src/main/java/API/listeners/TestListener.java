@@ -1,10 +1,10 @@
-package web.listeners;
+package API.listeners;
 
-import web.base.BaseTest;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import web.utils.Log;
+import API.base.BaseTest;
+import API.utils.Log;
 
 public class TestListener extends BaseTest implements ITestListener {
     private static String getTestMethodName(ITestResult iTestResult) {

@@ -11,7 +11,7 @@ import web.pages.HomePage;
 
 
 @Listeners({ TestListener.class })
-@Epic("Use Insider Web Automation")
+@Epic("Insider Web Automation")
 @Feature("Check Insider Home Page")
 public class InsiderTest extends BaseTest {
 

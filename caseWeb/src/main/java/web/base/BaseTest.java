@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import web.util.Log;
+import web.utils.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeSuite(alwaysRun = true)
-    public void setUp(@Optional("chrome") String browser) {
+    public void setup(@Optional("chrome") String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();

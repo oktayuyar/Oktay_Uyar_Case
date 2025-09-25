@@ -4,13 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import web.util.BasePageUtil;
-import web.util.Log;
+import web.utils.BasePageUtil;
+import web.utils.Log;
 
 import java.util.List;
 import java.util.Set;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
 
 public class CareersPage extends BasePageUtil {
 
@@ -83,8 +81,9 @@ public class CareersPage extends BasePageUtil {
     }
 
     public void checkListedJobsMatchWithFilters() {
-        waitSeconds(1);
         isElementDisplayed(jobCards);
+        Assert.assertEquals(waitForText(department, "Quality Assurance"), "Quality Assurance",
+                "Job cards department field value is not match!");
         List<WebElement> cards = findElements(jobCards);
         Integer cardSize = cards.size();
         for (int i = 0; i < cardSize ; i++) {
@@ -98,14 +97,7 @@ public class CareersPage extends BasePageUtil {
         hoverOverElement(viewRoleButton);
         waitUntilElementVisible(viewRoleButton);
         clickElement(viewRoleButton);
-        wait.until(driver -> driver.getWindowHandles().size() > 1);
-
-        Set<String> allWindows = driver.getWindowHandles();
-        String originalWindow = driver.getWindowHandle();
-        allWindows.remove(originalWindow);
-        String newWindow = allWindows.iterator().next();
-        driver.switchTo().window(newWindow);
-
+        switchToNewTab();
         Log.info("New Tab URL: " + driver.getCurrentUrl());
         Assert.assertTrue(driver.getCurrentUrl().contains("jobs.lever.co/useinsider"),"Lever app is not present!");
     }

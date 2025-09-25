@@ -1,4 +1,4 @@
-package web.util;
+package web.utils;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 
@@ -181,6 +182,16 @@ public class BasePageUtil extends BaseTest {
 
     }
 
+    public String switchToNewTab() {
+        wait.until(driver -> driver.getWindowHandles().size() > 1);
+
+        Set<String> allWindows = driver.getWindowHandles();
+        String originalWindow = driver.getWindowHandle();
+        allWindows.remove(originalWindow);
+        String newWindow = allWindows.iterator().next();
+        driver.switchTo().window(newWindow);
+        return newWindow;
+    }
 
     public void waitSeconds(Integer seconds) {
         try {

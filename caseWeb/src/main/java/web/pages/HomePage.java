@@ -3,7 +3,7 @@ package web.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import web.util.BasePageUtil;
+import web.utils.BasePageUtil;
 
 public class HomePage extends BasePageUtil {
 

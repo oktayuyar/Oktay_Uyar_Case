@@ -1,14 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Insider Web Automation Suite" parallel="false">
 
-    <listeners>
-        <listener class-name="web.listeners.TestListener"/>
-    </listeners>
+    <suite-files>
+        <suite-file path="src/test/resources/Chrome.xml"/>
+        <suite-file path="src/test/resources/Firefox.xml"/>
+    </suite-files>
 
-    <test name="Chrome Test">
-        <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="tests.InsiderTest"/>
-        </classes>
-    </test>
 </suite>
