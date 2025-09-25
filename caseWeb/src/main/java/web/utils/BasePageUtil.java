@@ -24,7 +24,6 @@ public class BasePageUtil extends BaseTest {
         this.actions = new Actions(driver);
     }
 
-
     public WebElement findElement(By selector) {
         try {
             Log.info("findElement method called:  finding " + selector);
@@ -179,7 +178,6 @@ public class BasePageUtil extends BaseTest {
                 throw ex;
             }
         }
-
     }
 
     public String switchToNewTab() {
