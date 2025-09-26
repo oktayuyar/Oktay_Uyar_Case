@@ -40,5 +40,5 @@ The report will be create in root directory under `/target/allure-report`.
 
 For open the report:
 
-[Allure Report](http://localhost:63342/Oktay_Uyar_Case/target/allure-report/index.html)
+`/target/allure-report/index.html`
 
