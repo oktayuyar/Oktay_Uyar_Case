@@ -1,6 +1,6 @@
 # Oktay Uyar Test Automation Case
 
-Java maven project for test automation, UI acceptance, API acceptance testing.
+Java maven project for test automation, UI acceptance, API acceptance and Load acceptance testing.
 Created with lessons learned from a large number of development projects to provide all commonly required components and concepts.
 
 ## Concepts Included
@@ -19,6 +19,7 @@ Created with lessons learned from a large number of development projects to prov
 * Selenium Webdriver
 * Log4j
 * REST Assured
+* Jmeter
 
 
 ## Usage
