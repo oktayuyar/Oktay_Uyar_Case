@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Insider Web Automation Suite" parallel="false">
+<suite name="Chrome Web Automation Suite">
 
     <parameter name="browser" value="chrome"/>
 

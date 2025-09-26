@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-
 public class BasePageUtil extends BaseTest {
 
     protected WebDriver driver;

@@ -8,7 +8,6 @@ import web.utils.BasePageUtil;
 import web.utils.Log;
 
 import java.util.List;
-import java.util.Set;
 
 public class CareersPage extends BasePageUtil {
 
