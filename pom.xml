@@ -14,6 +14,7 @@
     <modules>
         <module>caseWeb</module>
         <module>caseAPI</module>
+        <module>caseLoad</module>
     </modules>
 
     <properties>
