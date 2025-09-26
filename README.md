@@ -41,3 +41,5 @@ The report will be create in root directory under `/target/allure-report`.
 For open the report:
 
 [Allure Report](http://localhost:63342/Oktay_Uyar_Case/target/allure-report/index.html)
+
+![Report 2025-09-26 at 08.44.26.png](Report/Report%202025-09-26%20at%2008.44.26.png)
