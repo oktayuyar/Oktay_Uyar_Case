@@ -27,7 +27,6 @@
         <commons.io.version>2.15.1</commons.io.version>
         <allure.results.directory>${session.executionRootDirectory}/target/allure-results</allure.results.directory>
         <allure.report.directory>${session.executionRootDirectory}/target/allure-report</allure.report.directory>
-
     </properties>
 
     <dependencies>
