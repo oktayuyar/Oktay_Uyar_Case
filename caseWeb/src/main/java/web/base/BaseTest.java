@@ -28,6 +28,7 @@ import java.util.Date;
 public class BaseTest {
 
     public WebDriver driver;
+    private By acceptAllCookiesButton = By.id("wt-cli-accept-all-btn");
 
     @Parameters({"browser"})
     @BeforeSuite(alwaysRun = true)
@@ -58,7 +59,7 @@ public class BaseTest {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             WebElement acceptButton = wait.until(
-                    ExpectedConditions.elementToBeClickable(By.id("wt-cli-accept-all-btn"))
+                    ExpectedConditions.elementToBeClickable(acceptAllCookiesButton)
             );
             acceptButton.click();
             Log.info("Cookies popup closed.");
