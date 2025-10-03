@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 public class BasePageUtil extends BaseTest {
 
-    protected WebDriver driver;
     protected WebDriverWait wait;
     protected Actions actions;
 
