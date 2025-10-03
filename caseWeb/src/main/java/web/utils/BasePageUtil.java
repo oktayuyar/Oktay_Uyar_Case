@@ -157,7 +157,7 @@ public class BasePageUtil extends BaseTest {
         }
     }
 
-    public void selectFromDropdownWithScroll(By dropdownSelector, By optionSelector) {
+    public Boolean selectFromDropdownWithScroll(By dropdownSelector, By optionSelector) {
         Log.info("selectFromDropdownWithScroll method called: " + dropdownSelector);
         clickElement(dropdownSelector);
 
@@ -176,6 +176,7 @@ public class BasePageUtil extends BaseTest {
                 throw ex;
             }
         }
+        return found;
     }
 
     public String switchToNewTab() {
